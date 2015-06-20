@@ -71,8 +71,10 @@ def parse_contract_listing(page, last_updated)
       criteria = []
       row.search(:tr)[1..-1].each do |r|
         s = r.search(:td)[0].text
-        if !r.search(:td)[1].text.empty?
-          s = s + " (#{r.search(:td)[1].text} weighting)"
+        if r.search(:td).count > 1
+          if !r.search(:td)[1].text.nil?
+            s = s + " (#{r.search(:td)[1].text} weighting)"
+          end
         end
         criteria.push(s)
       end
