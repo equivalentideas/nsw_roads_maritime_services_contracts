@@ -89,7 +89,7 @@ def parse_contract_listing(page, last_updated)
 
   contractor = {
     name: contract_award_notice[:contractor_name],
-    abn: contract_award_notice[:abn],
+    abn: (contract_award_notice[:abn].nil? ? "#{contract_award_notice[:contractor_name]} + (no ABN provided)" : contract_award_notice[:abn]),
     acn: contract_award_notice[:acn],
     street_address: contract_award_notice[:street_address],
     city: contract_award_notice[:town_or_city],
