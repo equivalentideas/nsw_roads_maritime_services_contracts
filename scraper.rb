@@ -115,10 +115,7 @@ agent = Mechanize.new
 
 domain = "https://tenders.nsw.gov.au"
 
-search_indexes = [
-  "https://tenders.nsw.gov.au/rms/?refine=CN&keyword=WDA&event=public.advancedsearch.keyword&orderBy=Publish+Date+-+Descending",
-  "https://tenders.nsw.gov.au/?refine=CN&keyword=westconnex&orderBy=Publish%20Date%20-%20Descending&event=public%2Eadvancedsearch%2Ekeyword"
-]
+search_indexes = ["https://tenders.nsw.gov.au/rms/?event=public.advancedsearch.CNRedirect&invalidEventName=public.CN.search&type=cnEvent&publishFrom=&publishTo=&valueFrom=&valueTo=&supplierABN=&supplierName=&Postcode=&agencyStatus=-1&submit=Search"]
 
 search_indexes.each do |index_url|
   # param for selecting pages of results in the index
