@@ -64,7 +64,7 @@ def parse_contract_listing(page, last_updated)
         value = cleanup_string(row.search(:p)[1..-1].text)
       end
       # Get the row with the table
-    elsif !row.search(:table).empty?
+    elsif !row.search(:table).empty? && row.css('table tr').count > 1
       key = :tender_evaluation_criteria
 
       # Get the evaluation criteria from the table
@@ -78,6 +78,12 @@ def parse_contract_listing(page, last_updated)
       end
 
       value = criteria.join(", ")
+    # Get the row with a table that's contains one row of text.
+    # Lord knows why this exists :S see https://tenders.nsw.gov.au/rms/?event=public.cn.view&CNUUID=6211F76A-CE44-5ACA-D9FD7FD57AE06619
+    # for example.
+    elsif !row.search(:table).empty? && row.css('table tr').count == 1
+      key = format_key(row.search(:p)[0].text)
+      value = row.at(:table).inner_text
     end
 
     # only set the key and value here if a value is assigned
